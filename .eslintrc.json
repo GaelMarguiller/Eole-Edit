@@ -32,8 +32,12 @@
     "ignorePatterns": ["dist/**.*"],
     "rules": {
         "linebreak-style": [2, "windows"],
-        "import/extensions": [0, {"ts":  "never", "js": "never"}],
+        "import/extensions": [0, {"ts":  "never", "js": "never", "jsx" : "never", "tsx": "never"}],
+        "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
         "no-underscore-dangle": ["error", { "allowFunctionParams": true }],
-        "indent": ["error", 4]
+        "indent": ["error", 4],
+        "react/jsx-indent" : ["error", 4],
+        "max-len": ["error", 120],
+        "@typescript-eslint/ban-ts-comment": "off"
     }
 }

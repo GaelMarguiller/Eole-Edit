@@ -1,12 +1,19 @@
 import { Router } from 'express';
-import VideoFile from '../models/filesVideosModel';
+import mongoose from 'mongoose';
 
 const router = Router();
 
-router.post('/', async (req, res) => {
-    const { title, size, duration } = req.body;
+mongoose.connection.on('connected', () => {
+    const { db } = mongoose.connection;
+    const bucket = new mongoose.mongo.GridFSBucket(db, { bucketName: 'videoBucket' });
+    console.log(bucket);
+});
 
-    if (!title || !size || !duration) {
+router.post('/', async (req, res) => {
+    console.log(req);
+    console.log(req.body);
+    const { title, size, type } = req.body;
+    if (!title || !size || !type) {
         return res
             .status(400)
             .send('File invalid');
@@ -14,7 +21,7 @@ router.post('/', async (req, res) => {
 
     const videoFile = await new VideoFile();
     videoFile.title = title;
-    videoFile.duration = duration;
+    videoFile.type = type;
     videoFile.size = size;
 
     return videoFile;

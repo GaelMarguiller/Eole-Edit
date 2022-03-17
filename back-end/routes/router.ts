@@ -6,3 +6,5 @@ const router = Router();
 
 router.use('/upload', uploadRoute);
 router.use('/files', filesRoute);
+
+export default router;
